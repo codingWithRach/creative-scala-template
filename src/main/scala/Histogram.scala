@@ -18,7 +18,7 @@ import scala.annotation.tailrec
 //
 // 1. run `sbt`
 // 2. run the `run` command within `sbt`
-object Histogram2 {
+object Histogram {
   val recipients: List[Double] = List(1892051, 881381, 288286, 886214, 558151, 888289, 542379, 895883, 556439, 1908051)
   val percentages: List[Double] = List(63.28, 85.67, 95.31, 94.15, 94.29, 79.6, 90.88, 88.78, 73.66, 59.88)
 
