@@ -11,9 +11,8 @@ import cats.effect.unsafe.implicits.global
 import scala.annotation.tailrec
 
 // Histogram representation:
-// - height of bar represents number of recipients
-// - darkness of bar represents percentage receiving notification within specified time
-// (the lighter the bar the higher the percentage)
+// - height of bar represents percentage of recipients receiving notification within specified time
+// - darkness of bar represents number of recipients (the darker the bar the higher the number)
 
 // To use this example:
 //
