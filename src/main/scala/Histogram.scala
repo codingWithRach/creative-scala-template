@@ -26,18 +26,21 @@ object Histogram {
   val heights: List[Int] = percentages.map(percentage => math.round(percentage).toInt)
 
   val maxHeight: Int = heights.max
+  val colWidth: Int = 20
+  val gapWidth: Int = 5
+  val axisWidth: Int = 2
 
   val getRectangle: (Int, Int, Color) => Image = {
     (width: Int, height: Int, color: Color) =>
       Image.rectangle( width, height).fillColor(color).noStroke
         .below(Image.rectangle(width, maxHeight - height).fillColor(Color.white).noStroke)
-        .beside(Image.rectangle(5, height).fillColor(Color.white).noStroke)
+        .beside(Image.rectangle(gapWidth, height).fillColor(Color.white).noStroke)
   }
 
   val images: List[Image] = heights.zipWithIndex.map {
     case (blockHeight, index) =>
 //      println(darkenFactors(index))
-      getRectangle(20, blockHeight, Color.lightBlue.darken(darkenFactors(index)))
+      getRectangle(colWidth, blockHeight, Color.lightBlue.darken(darkenFactors(index)))
   }
 
 //  images.foreach(image => println(image))
@@ -50,7 +53,10 @@ object Histogram {
   val histogram: Image = getImage(images.head, images, 1)
 //  println(histogram)
 
+  val histogramWithAxes: Image = getRectangle( axisWidth, maxHeight, Color.black ).beside(histogram)
+    .above( Image.rectangle( (heights.length - 1) * (colWidth + gapWidth) + gapWidth, axisWidth).fillColor(Color.black).noStroke)
+
   def main(args: Array[String]): Unit = {
-    histogram.draw()
+    histogramWithAxes.draw()
   }
 }
