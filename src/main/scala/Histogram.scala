@@ -13,11 +13,6 @@ import scala.annotation.tailrec
 // Histogram representation:
 // - height of bar represents percentage of recipients receiving notification within specified time
 // - darkness of bar represents number of recipients (the darker the bar the higher the number)
-
-// To use this example:
-//
-// 1. run `sbt`
-// 2. run the `run` command within `sbt`
 object Histogram {
   val recipients: List[Double] = List(1892051, 881381, 288286, 886214, 558151, 888289, 542379, 895883, 556439, 1908051)
   val percentages: List[Double] = List(63.28, 85.67, 95.31, 94.15, 94.29, 79.6, 90.88, 88.78, 73.66, 59.88)
@@ -39,11 +34,8 @@ object Histogram {
 
   val images: List[Image] = heights.zipWithIndex.map {
     case (blockHeight, index) =>
-//      println(darkenFactors(index))
       getRectangle(colWidth, blockHeight, Color.lightBlue.darken(darkenFactors(index)))
   }
-
-//  images.foreach(image => println(image))
 
   @tailrec def getImage(existingImage: Image, images: List[Image], index: Int): Image = {
     if (index == images.length - 1) existingImage
@@ -51,7 +43,6 @@ object Histogram {
   }
 
   val histogram: Image = getImage(images.head, images, 1)
-//  println(histogram)
 
   val histogramWithAxes: Image = getRectangle( axisWidth, maxHeight, Color.black ).beside(histogram)
     .above( Image.rectangle( (heights.length - 1) * (colWidth + gapWidth) + gapWidth, axisWidth).fillColor(Color.black).noStroke)
