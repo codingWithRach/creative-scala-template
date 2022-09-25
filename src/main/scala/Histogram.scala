@@ -27,9 +27,12 @@ object Histogram {
 
   val getRectangle: (Int, Int, Color) => Image = {
     (width: Int, height: Int, color: Color) =>
-      Image.rectangle( width, height).fillColor(color).noStroke
-        .below(Image.rectangle(width, maxHeight - height).fillColor(Color.white).noStroke)
-        .beside(Image.rectangle(gapWidth, height).fillColor(Color.white).noStroke)
+    val block: Image = Image.rectangle(width, height).fillColor(color).noStroke
+      .beside(Image.rectangle(gapWidth, height).fillColor(Color.white).noStroke)
+    if (height < maxHeight)
+      Image.rectangle(width, maxHeight - height).fillColor(Color.white).noStroke.above(block)
+    else
+      block
   }
 
   val images: List[Image] = heights.zipWithIndex.map {
