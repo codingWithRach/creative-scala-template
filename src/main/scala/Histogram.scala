@@ -3,9 +3,6 @@ import doodle.image.*
 import doodle.image.syntax.all.*
 import doodle.image.syntax.core.*
 import doodle.java2d.*
-import doodle.reactor.*
-
-import scala.concurrent.duration.*
 import cats.effect.unsafe.implicits.global
 
 import scala.annotation.tailrec
