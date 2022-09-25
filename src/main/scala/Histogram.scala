@@ -17,13 +17,14 @@ object Histogram {
   val recipients: List[Double] = List(1892051, 881381, 288286, 886214, 558151, 888289, 542379, 895883, 556439, 1908051)
   val percentages: List[Double] = List(63.28, 85.67, 95.31, 94.15, 94.29, 79.6, 90.88, 88.78, 73.66, 59.88)
 
-  val darkenFactors: List[Normalized] = recipients.map(recipient => (recipient/1000000 - 0.3).normalized)
-  val heights: List[Int] = percentages.map(percentage => math.round(percentage).toInt)
+  val heightFactor: Int = 4
+  val heights: List[Int] = percentages.map(percentage => math.round(percentage).toInt * heightFactor)
+  val darkenFactors: List[Normalized] = recipients.map(recipient => (recipient / 1000000 - 0.3).normalized)
 
   val maxHeight: Int = heights.max
-  val colWidth: Int = 20
-  val gapWidth: Int = 5
-  val axisWidth: Int = 2
+  val colWidth: Int = 50
+  val gapWidth: Int = 10
+  val axisWidth: Int = 3
 
   val getRectangle: (Int, Int, Color) => Image = {
     (width: Int, height: Int, color: Color) =>
